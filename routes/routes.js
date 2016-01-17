@@ -3,14 +3,20 @@
  */
 
 var authentication = require('../config/authentication');
+var balance = require('../services/checkbalance');
+var message = require('../services/sendMessage');
 module.exports = function(app) {
 
 
 //=========================================================================================================
-//TXT REPLY ROUTE=========================================================================================
+//CHECK BALANCE ROUTE=========================================================================================
 //=========================================================================================================
 
+    app.get('/checkbalance', function (req, res) {
+        // render the page and pass in any flash data if it exists
+        res.send('sadsad');
 
+    });
 
 
 //=========================================================================================================
@@ -38,6 +44,11 @@ module.exports = function(app) {
 
         res.render('message.ejs', { message: req.flash('loginMessage') });
     });
+    app.post('/message', authentication.isAuthorized,message.send, function (req, res) {
+        // render the page and pass in any flash data if it exists
+
+        res.render('message.ejs', { message: req.flash('messagesent') });
+    });
 //=========================================================================================================
 //=========================================================================================================
 //=========================================================================================================
@@ -63,15 +74,15 @@ module.exports = function(app) {
     //=========================================================================================================
 //PASSWORD CHANGE ROUTE=========================================================================================
 //=========================================================================================================
-    app.get('/passwordchange', authentication.isAuthorized, function (req, res) {
+    app.get('/passwordchange', authentication.isAuthorized,balance.getBalance, function (req, res) {
         // render the page and pass in any flash data if it exists
-        res.render('passwordchange.ejs', { message: req.flash('passwordChangeMessage') });
+        res.render('passwordchange.ejs', { message: req.flash('passwordChangeMessage'),balance:req.flash('balance') });
     });
-    app.post('/passwordchange', authentication.isAuthorized,authentication.updatePassword, function (req, res) {
+    app.post('/passwordchange', authentication.isAuthorized,authentication.updatePassword,balance.getBalance, function (req, res) {
         // render the page and pass in any flash data if it exists
 
 //        console.log( req.flash('passwordChangeMessage'));
-        res.render('passwordchange.ejs', { message: req.flash('passwordChangeMessage') });
+        res.render('passwordchange.ejs', { message: req.flash('passwordChangeMessage') ,balance:req.flash('balance') });
     });
 //=========================================================================================================
 //=========================================================================================================

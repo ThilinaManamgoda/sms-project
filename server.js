@@ -32,6 +32,7 @@ app.use(session({
     activeDuration:5*60*1000
 }));
 app.use(flash()); // use connect-flash for flash messages stored in session
+
 // set up ejs for templating
 app.set('view engine', 'ejs');
 //---------------------------------------------------------------------------------------------------------
