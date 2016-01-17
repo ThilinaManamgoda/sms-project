@@ -39,6 +39,8 @@ module.exports = {
                     next();
                 }
             });
+        }else{
+           res.redirect('/login');
         }
     },
     updatePassword: function (req, res, next) {
