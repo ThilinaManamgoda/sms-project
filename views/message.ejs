@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Starter Template for Bootstrap 3.3.6</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <style>body {
+        padding-top: 50px;
+        background-color: gray;
+    }
+    </style>
+
+    <!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    -->
+</head>
+
+<body>
+<div class="container">
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!-----------------------------------------------ROW------------------------------------------------------------------>
+    <div class="row">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header"><a class="navbar-brand" href="#">SMS Sender</a></div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/message">HOME</a></li>
+                    <li><a href="/passwordchange">ACCOUNT MANAGEMENT</a></li>
+                    <li><a href="/adduser">ADD USER</a></li>
+                    <li ><a href="logout">Logout <span class="glyphicon glyphicon-log-out" ></span></a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------ROW----------------------------------------------------------------->
+    <div class="row">
+
+        <div class="col-lg-10">
+
+            <form class="form-horizontal" role="form" method="post" action="/message">
+
+                <div class="form-group">
+                    <label for="message" style="font-size: 20px">Message</label>
+                    <textarea class="form-control" rows="8" id="message" name="message"></textarea>
+                </div>
+
+
+                <div class="form-group">
+
+                        <button type="submit" class="btn btn-info" id="submitbtn">SEND</button>
+
+                </div>
+            </form>
+            <% if (message.length>0) { %>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel"> SMS bulk sender</h4></div>
+                        <div class="modal-body"> <%=message%></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content --> </div>
+                <!-- /.modal-dialog --> </div>
+            <!-- /.modal -->
+
+            <script type="text/javascript">
+                window.addEventListener('load', function(){
+                    $('#myModal').modal('show');
+                });
+            </script>
+
+            <% } %>
+        </div>
+        <div class="col-lg-2"></div>
+
+    </div>
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
