@@ -15,7 +15,8 @@ var mongoose = require('mongoose');
 //CONNECT MONGODB==========================================================================================
 //=========================================================================================================
 
-mongoose.connect('mongodb://localhost/smsauth');
+//mongoose.connect('mongodb://localhost/smsauth');
+mongoose.connect('mongodb://heroku_8r3qsz3x:kpqd7fp7aodliiuucpfbr6t7qi@ds047335.mongolab.com:47335/heroku_8r3qsz3x');
 //---------------------------------------------------------------------------------------------------------
 
 
