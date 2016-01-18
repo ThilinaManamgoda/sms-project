@@ -6,8 +6,23 @@ var authentication = require('../config/authentication');
 var balance = require('../services/checkbalance');
 var message = require('../services/sendMessage');
 var Settings = require('../services/settingsService');
+var interceptResponse = require('../services/interceptResponse');
 module.exports = function(app) {
 
+
+//=========================================================================================================
+//Response ROUTE=========================================================================================
+//=========================================================================================================
+    app.get('/response/', interceptResponse.loadResponse, function (req, res) {
+//        // render the page and pass in any flash data if it exists
+//        req.session.reset();
+//        res.redirect('/login');
+        res.send(200).end;
+
+    });
+//=========================================================================================================
+//=========================================================================================================
+//=========================================================================================================
 
 
 //=========================================================================================================
