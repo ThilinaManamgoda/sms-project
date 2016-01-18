@@ -5,23 +5,10 @@
 var authentication = require('../config/authentication');
 var balance = require('../services/checkbalance');
 var message = require('../services/sendMessage');
+var Settings = require('../services/settingsService');
 module.exports = function(app) {
 
 
-//=========================================================================================================
-//CHECK BALANCE ROUTE=========================================================================================
-//=========================================================================================================
-
-    app.get('/checkbalance', function (req, res) {
-        // render the page and pass in any flash data if it exists
-        res.send('sadsad');
-
-    });
-
-
-//=========================================================================================================
-//=========================================================================================================
-//=========================================================================================================
 
 //=========================================================================================================
 //LOGOUT ROUTE=========================================================================================
@@ -72,17 +59,17 @@ module.exports = function(app) {
 //=========================================================================================================
 
     //=========================================================================================================
-//PASSWORD CHANGE ROUTE=========================================================================================
+//SETTINGS ROUTE=========================================================================================
 //=========================================================================================================
-    app.get('/passwordchange', authentication.isAuthorized,balance.getBalance, function (req, res) {
+    app.get('/settings', authentication.isAuthorized,balance.getBalance,Settings.setSettings, function (req, res) {
         // render the page and pass in any flash data if it exists
-        res.render('passwordchange.ejs', { message: req.flash('passwordChangeMessage'),balance:req.flash('balance') });
+        res.render('settings.ejs', { passwordChangeMessage: req.flash('passwordChangeMessage'),balance:req.flash('balance') ,settingsMessage:req.flash('settingsMessage'),phonenumber:req.flash('phonenumber')});
     });
-    app.post('/passwordchange', authentication.isAuthorized,authentication.updatePassword,balance.getBalance, function (req, res) {
+    app.post('/settings', authentication.isAuthorized,authentication.updatePassword,balance.getBalance, function (req, res) {
         // render the page and pass in any flash data if it exists
 
 //        console.log( req.flash('passwordChangeMessage'));
-        res.render('passwordchange.ejs', { message: req.flash('passwordChangeMessage') ,balance:req.flash('balance') });
+        res.render('settings.ejs', { passwordChangeMessage: req.flash('passwordChangeMessage') ,balance:req.flash('balance'),settingsMessage:req.flash('settingsMessage'),phonenumber:req.flash('phonenumber') });
     });
 //=========================================================================================================
 //=========================================================================================================

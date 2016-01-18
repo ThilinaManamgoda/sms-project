@@ -49,5 +49,7 @@ var routes= require('./routes/routes')(app);
 //=========================================================================================================
 var save=require('./config/authentication');
 save.save();
+var save=require('./services/settingsService');
+save.save();
 app.listen(port);
 console.log('The magic happens on port ' + port);

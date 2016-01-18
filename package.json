@@ -19,6 +19,7 @@
     "client-sessions": "~0.7.0",
     "simple-encryptor": "~1.0.3",
     "crypto": "0.0.3",
-    "request": "~2.67.0"
+    "request": "~2.67.0",
+    "xls-to-json": "~0.3.2"
   }
 }

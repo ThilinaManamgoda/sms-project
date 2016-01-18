@@ -35,12 +35,12 @@ module.exports = {
 
                     delete user.password;
                     req.session.user = user;
-                    req.flash('test','test!');
+                    req.flash('test', 'test!');
                     next();
                 }
             });
-        }else{
-           res.redirect('/login');
+        } else {
+            res.redirect('/login');
         }
     },
     updatePassword: function (req, res, next) {
@@ -48,44 +48,39 @@ module.exports = {
 //        console.log(req.flash('test'));
         User.findOne({email: req.session.user.email}, function (err, user) {
             if (!user) {
-                req.flash('passwordChangeMessage','Invalid user !');
-                next();
+                req.flash('passwordChangeMessage', 'Invalid user !');
+                res.render('settings.ejs', { passwordChangeMessage: req.flash('passwordChangeMessage')});
             } else {
                 if (cript.isMatch(user.password, req.body.currentpassword)) {
 
-                    if(req.body.newpassword==req.body.retypepassword){
+                    if (req.body.newpassword == req.body.retypepassword) {
                         var conditions = { email: req.session.user.email}
                             , update = { $set: { password: cript.encrypt(req.body.newpassword) }}
                             , options = { multi: false };
 
-                        User.update(conditions, update, options, function (err,rows) {
-                            if(err) {
-                                req.flash('passwordChangeMessage','Update failed !');
-                                next();
-                            } else{
-                                req.flash('passwordChangeMessage','Update success !');
+                        User.update(conditions, update, options, function (err, rows) {
+                            if (err) {
+                                req.flash('passwordChangeMessage', 'Update failed !');
+                                res.render('settings.ejs', { passwordChangeMessage: req.flash('passwordChangeMessage')});
+                            } else {
+                                req.flash('passwordChangeMessage', 'Update success !');
                                 next();
                             }
-                        } );
-                    }else{
-                        console.log('ok');
-                        req.flash('passwordChangeMessage','Passwords don\'t match !');
-                        next();
+                        });
+                    } else {
+                        req.flash('passwordChangeMessage', 'Passwords don\'t match !');
+                        res.render('settings.ejs', { passwordChangeMessage: req.flash('passwordChangeMessage')});
                     }
 
 
-                }else{
-                    req.flash('passwordChangeMessage','Invalid current password');
-                    next();
+                } else {
+                    req.flash('passwordChangeMessage', 'Invalid current password');
+                    res.render('settings.ejs', { passwordChangeMessage: req.flash('passwordChangeMessage')});
 
                 }
 
             }
         });
-
-
-
-
 
 
     },

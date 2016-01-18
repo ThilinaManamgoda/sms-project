@@ -7,7 +7,7 @@
     <title>Starter Template for Bootstrap 3.3.6</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css">
     <style>body {
             padding-top: 50px;
             background-color: gray;
@@ -38,10 +38,9 @@
             <div class="navbar-header"><a class="navbar-brand" href="#">SMS Sender</a></div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li><a href="/message">HOME</a></li>
-                    <li class="active"><a href="/accountmanagement">ACCOUNT MANAGEMENT</a></li>
-                    <li><a href="/adduser">ADD USER</a></li>
-                    <li><a href="logout">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
+                    <li ><a href="/message">HOME <span class="glyphicon glyphicon-home" ></span></a></li>
+                    <li class ="active"><a href="/settings">SETTINGS <span class="glyphicon glyphicon-cog" ></span></a></li>
+                    <li ><a href="/logout">Logout <span class="glyphicon glyphicon-log-out" ></span></a></li>
                 </ul>
             </div>
 
@@ -59,7 +58,7 @@
             <form class="form-horizontal" role="form">
                 <div class="form-group"><label for="balance" class="col-sm-3 control-label ">Balance:</label>
 
-                    <div class="col-sm-3"><input type="text" style="text-align: right" class="form-control " id="balance" value="<%= balance %> " ></div>
+                    <div class="col-sm-3"><input disabled type="text"  class="form-control " id="balance" value="<%= balance %> " ></div>
                 </div>
             </form>
 
@@ -73,7 +72,19 @@
     <div class="row">
 
         <div class="col-lg-8">
-            <form class="form-horizontal" role="form" action="/passwordchange" method="post">
+            <form class="form-horizontal" role="form" action="/settings" method="post">
+
+                <div class="form-group"><label for="number" class="col-sm-3 control-label "  >Phone Number</label>
+
+                    <div class="col-sm-9"><input type="text" class="form-control bfh-phone" id="number"
+                                                 value="<%= phonenumber %> " data-format="+94ddddddddd" ></div>
+                </div>
+                <div class="form-group"><label for="textitpassword" class="col-sm-3 control-label" >Textit Account Password</label>
+
+                    <div class="col-sm-9"><input name="textitpassword" type="password" placeholder="****" defaultValue="'8949" class="form-control"
+                                                 id="textitpassword"
+                                                ></div>
+                </div>
                 <div class="form-group"><label for="currentpassword" class="col-sm-3 control-label">Current
                         Password</label>
 
@@ -103,7 +114,42 @@
                 </div>
             </form>
         </div>
-        <% if (message.length > 0) { %>
+        <!--===================================================================================================================
+        //FLASH MESSAGE======================================================================================================
+        //===================================================================================================================-->
+        <% if (passwordChangeMessage.length > 0) { %>
+        <!-- Modal -->
+        <div class="modal fade" id="passwordChangeMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel"> SMS bulk sender</h4></div>
+                    <div class="modal-body"> <%= passwordChangeMessage %></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> </div>
+            <!-- /.modal-dialog --> </div>
+        <!-- /.modal -->
+
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                $('#passwordChangeMessage').modal('show');
+            });
+        </script>
+
+        <% } %>
+
+       <!-- //===================================================================================================================
+        //===================================================================================================================
+        //===================================================================================================================
+        //===================================================================================================================
+        //FLASH MESSAGE======================================================================================================
+        //===================================================================================================================-->
+        <% if (settingsMessage.length > 0) { %>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
@@ -112,7 +158,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myModalLabel"> SMS bulk sender</h4></div>
-                    <div class="modal-body"> <%= message %></div>
+                    <div class="modal-body"> <%= settingsMessage %></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -129,6 +175,9 @@
 
         <% } %>
 
+        <!--//===================================================================================================================
+        //===================================================================================================================
+        //===================================================================================================================-->
         <div class="col-lg-2"></div>
 
     </div>
@@ -138,10 +187,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script>
-
-</script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
 </body>
 
 </html>
