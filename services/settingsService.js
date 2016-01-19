@@ -62,8 +62,8 @@ module.exports = {
 
     save:function(){
         var newsettings = new Settings({
-            phonenumber:'94702018761',
-            password:'8949',
+            phonenumber:'947xxxxxxxxx',
+            password:'xxxx',
             settings:'config'
 
         });

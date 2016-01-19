@@ -9,6 +9,9 @@ body {
 .text-color{
     color: white;
 }
+.text-flash-color{
+    color: black;
+}
 .balance{
 
     font-family: verdana;

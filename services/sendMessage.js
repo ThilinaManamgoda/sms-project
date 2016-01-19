@@ -12,7 +12,7 @@ module.exports = {
 
             var id = config.phonenumber;
             var pw = config.password;
-            var numbers='94770445855';
+            var numbers='9477xxxxxxx';
             //REPLACE MESSAGE SPACE WITH '+' AND TRIMMING
             message = encodeURIComponent(message);
             //CALL REST API OF www.textit.biz
@@ -26,6 +26,7 @@ module.exports = {
                     next();
                 }
             });
+
 
 
 
